@@ -5,11 +5,16 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "serve:lambda": "netlify-lambda serve lambda",
+    "build:app": "vue-cli-service build",
+    "build:lambda": "netlify-lambda build lambda"
   },
   "dependencies": {
+    "apexcharts": "^3.13.0",
     "axios": "^0.19.1",
     "core-js": "^3.4.3",
+    "dotenv": "^8.2.0",
     "vue": "^2.6.10"
   },
   "devDependencies": {
