@@ -1,5 +1,7 @@
 # hello-world
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/60fb4945-6d3c-4752-ab9d-d72ba176deb5/deploy-status)](https://app.netlify.com/sites/zealous-morse-06ec4e/deploys)
+
 ## Project setup
 ```
 npm install
