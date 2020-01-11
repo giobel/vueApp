@@ -31,7 +31,10 @@ export default {
         created: function () {
        this.loadItems();
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 73c89d7... update
            lambdaService
       .fetchRecords()
       .then(response => {
@@ -41,6 +44,9 @@ export default {
       .catch(err => {
         this.error = err
       })
+<<<<<<< HEAD
+>>>>>>> parent of 73c89d7... update
+=======
 >>>>>>> parent of 73c89d7... update
     },
   methods:{
