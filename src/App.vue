@@ -12,8 +12,6 @@
 
 import axios from "axios";
 import HelloWorld from './components/HelloWorld.vue'
-import lambdaService from '@/lambdaService'
-
 
 // eslint-disable-next-line no-console
 console.log(process.env.VUE_APP_SECRET)  // SOME_KEY_VALUE
@@ -30,15 +28,9 @@ export default {
   },
         created: function () {
        this.loadItems();
-           lambdaService
-      .fetchRecords()
-      .then(response => {
-        this.startups = response.records
-          .map(r => r.fields)
-      })
-      .catch(err => {
-        this.error = err
-      })
+       
+       // eslint-disable-next-line no-console
+       console.log(process.env.VUE_APP_ID)
     },
   methods:{
      loadItems(){
