@@ -4,7 +4,15 @@
     <!-- <li v-for="size in this.msg" v-bind:key="size" >{{ size.warnings }}</li> -->
     <li v-for="(value, index) in msg"  v-bind:key="index">
       {{value.day.split("T")[0]}} : {{value.warnings}}</li>
-              <div id="apexchart"></div>
+              
+  </div>
+</template>
+
+<template>
+  <div class="border-2 rounded-lg py-4 px-1 shadow-lg mb-8">
+    <h1 class="text-xl font-semibold">Basic Chart</h1>
+    <div id="apexchart"></div>
+    <apexchart height="200" type="line" :options="chartOptions" :series="series"/>
   </div>
 </template>
 
@@ -36,7 +44,8 @@ export default {
       //console.log("apex: " + this.items.map(s => s.sheets));
     var options = {
       chart: {
-        type: 'line'
+        type: 'line',
+        height: '200'
       },
       series: [{
         name: 'Warnings',

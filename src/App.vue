@@ -12,7 +12,6 @@
 
 import axios from "axios";
 import HelloWorld from './components/HelloWorld.vue'
-import lambdaService from '@/lambdaService'
 
 
 // eslint-disable-next-line no-console
@@ -30,24 +29,6 @@ export default {
   },
         created: function () {
        this.loadItems();
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> parent of 73c89d7... update
-           lambdaService
-      .fetchRecords()
-      .then(response => {
-        this.startups = response.records
-          .map(r => r.fields)
-      })
-      .catch(err => {
-        this.error = err
-      })
-<<<<<<< HEAD
->>>>>>> parent of 73c89d7... update
-=======
->>>>>>> parent of 73c89d7... update
     },
   methods:{
      loadItems(){
