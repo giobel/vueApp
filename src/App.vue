@@ -1,10 +1,10 @@
 <template>
-  <div id="app">    
-<h1> BGH </h1>
+    <div id='app'>
     <HelloWorld :msg="items"></HelloWorld>
-
-  </div>
+    </div>
 </template>
+
+
 
 <script>
 
@@ -28,9 +28,6 @@ export default {
   },
         created: function () {
        this.loadItems();
-       
-       // eslint-disable-next-line no-console
-       console.log(process.env.VUE_APP_ID)
     },
   methods:{
      loadItems(){
