@@ -30,7 +30,7 @@ export default {
   methods:{
      loadItems(){
       // eslint-disable-next-line no-console
-      console.log("Load items from Airtable");
+    // console.log("Load items Airtable " + process.env.VUE_APP_ID);
       // Init variables
       var self = this
       var app_id = process.env.VUE_APP_ID;
