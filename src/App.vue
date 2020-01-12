@@ -1,7 +1,16 @@
 <template>
-    <div id='app'>
+<div id='app'>
+    <h1>Title</h1>
     <HelloWorld :msg="items"></HelloWorld>
-    </div>
+ 
+
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+  With Bootstrap!
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+</div>
 </template>
 
 
@@ -32,29 +41,32 @@ export default {
     },
   methods:{
      loadItems(){
-      // eslint-disable-next-line no-console
-    // console.log("Load items Airtable " + process.env.VUE_APP_ID);
       // Init variables
       var self = this
       var app_id = process.env.VUE_APP_ID;
       var app_key = process.env.VUE_APP_KEY;
       this.items = []
       axios.get(
-          "https://api.airtable.com/v0/"+app_id+"/Model%20Status?maxRecords=100&Menu?view=Grid%20view",
+          //"https://api.airtable.com/v0/"+app_id+"/Model%20Status?maxRecords=100&Menu?view=Grid%20view"
+          "https://api.airtable.com/v0/"+app_id+"/Model%20Status?maxRecords=100&sort%5B0%5D%5Bfield%5D=Id&sort%5B0%5D%5Bdirection%5D=asc&view=Grid%20view",
           { 
               headers: { Authorization: "Bearer "+app_key } 
           }
       ).then(function(response){
 
-        //self.items = response.data.records;
-        response.data.records.forEach(item =>{
-          var obj = {day: item['fields']['Created'], 
+      var airtableRecords = response.data.records
+
+          // eslint-disable-next-line no-console
+          //console.log(airtableRecords.map(x=>x.fields.Id))
+
+        airtableRecords.forEach(item =>{
+          var obj = {eid: item['fields']['Id'], 
+                    day: item['fields']['Created'], 
                     warnings: item['fields']['WARNINGS'], 
                     sheets: item['fields']['SHEETS']};
           self.items.push(obj);
         });
-          
-          
+
       }).catch(function(error){
           // eslint-disable-next-line no-console
           console.log(error)
