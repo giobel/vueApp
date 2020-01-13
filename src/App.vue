@@ -33,10 +33,9 @@ export default {
     return{
       items: [],
       startups: [],
-
     }
   },
-        created: function () {
+  created: function () {
        this.loadItems();
     },
   methods:{
@@ -56,8 +55,8 @@ export default {
 
       var airtableRecords = response.data.records
 
-          // eslint-disable-next-line no-console
-          //console.log(airtableRecords.map(x=>x.fields.Id))
+          //eslint-disable-next-line no-console
+          // console.log(airtableRecords.map(x=>x.fields.Id))
 
         airtableRecords.forEach(item =>{
           var obj = {eid: item['fields']['Id'], 
@@ -87,6 +86,8 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 30px;
+  margin-left: 30px;
+  margin-right: 30px;
 }
 </style>

@@ -1,10 +1,18 @@
 <template>
   <div class="hello">
+    <div class="container-fluid mt-4">
+    <div class="row justify-content-center">
+    <Card v-for="(value, index) in statusSummary"  v-bind:key="index" :title="value"/>  
+    </div>
+    </div>
     <h3>List of values</h3>
     <!-- <li v-for="size in this.msg" v-bind:key="size" >{{ size.warnings }}</li> -->
     <li v-for="(value, index) in msg"  v-bind:key="index">
       {{value.eid}} : {{value.day.split("T")[0]}} - Warnings {{value.warnings}}</li>
-    <div id="apexchart"></div>          
+    <div id="apexchart"></div>        
+    <!-- <Card v-for="(value, index) in msg"  v-bind:key="index" :title="value.eid.toString()"/>   -->
+
+
   </div>
   
 </template>
@@ -13,16 +21,24 @@
 <script>
 
 import ApexCharts from 'apexcharts'
+import Card from './Card.vue'
 
 export default {
   name: 'HelloWorld',
   props:{
     msg: Array,
   },
+  components: {
+    Card
+  },
   data() {
     return {
-      chart: null
+      chart: null,
+      statusSummary: []
     };
+  },
+  created(){
+      this.statusSummary.push({titolo:"Warnings", count:"45"},{titolo:"Elements", count:"450"})
   },
   watch: {
       msg(val) {

@@ -8,8 +8,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 Vue.config.productionTip = false
 
 
-
-
+// Styles
+import 'bootstrap/dist/css/bootstrap.css';
 
 new Vue({
   render: h => h(App),
