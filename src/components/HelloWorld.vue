@@ -8,7 +8,7 @@
     <h3>List of values</h3>
     <!-- <li v-for="size in this.msg" v-bind:key="size" >{{ size.warnings }}</li> -->
     <li v-for="(value, index) in msg"  v-bind:key="index">
-      {{value.eid}} : {{value.last_update}} - Warnings {{value.warnings}}</li>
+      {{value.eid}} : {{value.Updated}} - Warnings {{value.Warnings}}</li>
     <div id="apexchart"></div>        
     <!-- <Card v-for="(value, index) in msg"  v-bind:key="index" :title="value.eid.toString()"/>   -->
   </div>
@@ -60,11 +60,11 @@ export default {
 
 
     this.msg.forEach( item =>{
-    var dateString = new Date(item.last_update);
+    var dateString = new Date(item.Updated);
     
     this.newDate.push(dateFormat(dateString, "ddd dd/mm/yy htt"))
-    this.sheetsTimeSerie.push(item.sheets);
-    this.warningTimeSerie.push(item.warnings);
+    this.sheetsTimeSerie.push(item.Sheets);
+    this.warningTimeSerie.push(item.Warnings);
     })
 
     // eslint-disable-next-line no-console

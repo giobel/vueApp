@@ -3,7 +3,6 @@
     <h1>BGH</h1>
     <HelloWorld :msg="items"></HelloWorld>
  
-
   <div class="alert alert-success alert-dismissible fade show" role="alert">
   With Bootstrap!
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -60,9 +59,11 @@ export default {
 
         airtableRecords.forEach(item =>{
           var obj = {eid: item['fields']['Id'], 
-                    last_update: item['fields']['Created'], 
-                    warnings: item['fields']['WARNINGS'], 
-                    sheets: item['fields']['SHEETS']};
+                    Updated: item['fields']['Created'], 
+                    Warnings: item['fields']['WARNINGS'], 
+                    Sheets: item['fields']['SHEETS'],
+                    Elements: item['fields']['ELEMENTS']
+                    };
           self.items.push(obj);
         });
 
