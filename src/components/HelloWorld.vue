@@ -2,17 +2,15 @@
   <div class="hello">
     <div class="container-fluid mt-4">
     <div class="row justify-content-center">
-    <Card v-for="(value, index) in statusSummary"  v-bind:key="index" :title="value"/>  
+    <Card v-for="(value, index) in statusSummary"  v-bind:key="index" :title="value" :bodyContent="index.toString()"/>  
     </div>
     </div>
     <h3>List of values</h3>
     <!-- <li v-for="size in this.msg" v-bind:key="size" >{{ size.warnings }}</li> -->
     <li v-for="(value, index) in msg"  v-bind:key="index">
-      {{value.eid}} : {{value.day.split("T")[0]}} - Warnings {{value.warnings}}</li>
+      {{value.eid}} : {{value.last_update}} - Warnings {{value.warnings}}</li>
     <div id="apexchart"></div>        
     <!-- <Card v-for="(value, index) in msg"  v-bind:key="index" :title="value.eid.toString()"/>   -->
-
-
   </div>
   
 </template>
@@ -22,6 +20,7 @@
 
 import ApexCharts from 'apexcharts'
 import Card from './Card.vue'
+var dateFormat = require('dateformat');
 
 export default {
   name: 'HelloWorld',
@@ -34,15 +33,23 @@ export default {
   data() {
     return {
       chart: null,
-      statusSummary: []
+      statusSummary: [],
+      newDate: [],
+      sheetsTimeSerie: [],
+      warningTimeSerie: [],
     };
   },
   created(){
-      this.statusSummary.push({titolo:"Warnings", count:"45"},{titolo:"Elements", count:"450"})
+      //this.statusSummary.push({titolo:"Warnings", count:"45"},{titolo:"Elements", count:"450"})
+      
+      // eslint-disable-next-line no-console
+      //console.log("msg length " + this.msg[this.msg.length-1])
   },
   watch: {
       msg(val) {
       if (this.chart != null) this.chart.remove();
+      //this.statusSummary.push(this.msg[this.msg.length-1])
+      this.statusSummary = Object.entries(this.msg[this.msg.length-1]);
       this.apex(val);
     }
   },
@@ -50,51 +57,122 @@ export default {
     apex(){
       // eslint-disable-next-line no-console
       //console.log("apex: " + this.items.map(s => s.sheets));
-    var options = {
+    //var date = this.msg.map(s => s.last_update);
+
+
+    this.msg.forEach( item =>{
+    var dateString = new Date(item.last_update);
+    
+    this.newDate.push(dateFormat(dateString, "ddd dd/mm/yy htt"))
+    this.sheetsTimeSerie.push(item.sheets);
+    this.warningTimeSerie.push(item.warnings);
+    })
+
+    // eslint-disable-next-line no-console
+    console.log(this.sheetsTimeSerie)
+
+
+var options = {
       chart: {
-        type: 'line',
-        height: '200'
+        type: "area",
+        height: 300,
+        foreColor: "#999",
+        stacked: true,
+        dropShadow: {
+          enabled: true,
+          enabledSeries: [0],
+          top: -2,
+          left: 2,
+          blur: 5,
+          opacity: 0.06
+        }
+      },
+      colors: ['#00E396', '#0090FF'],
+      stroke: {
+        curve: "smooth",
+        width: 3
+      },
+      dataLabels: {
+        enabled: false
       },
       series: [{
         name: 'Warnings',
-        data: this.msg.map(s => s.warnings)
-      },
-      {
+        data: this.warningTimeSerie
+        
+        
+      }, {
         name: 'Sheets',
-        data: this.msg.map(s => s.sheets)
+        data: this.sheetsTimeSerie
       }],
-      xaxis: {
-        categories: this.msg.map(s => s.day),
-            labels: {
-      datetimeFormatter: {
-        year: 'yyyy',
-        month: 'MMM \'yy',
-        day: 'dd MMM',
-        hour: 'HH:mm'
-      }
-    }
+      markers: {
+        size: 0,
+        strokeColor: "#fff",
+        strokeWidth: 3,
+        strokeOpacity: 1,
+        fillOpacity: 1,
+        hover: {
+          size: 6
+        }
       },
-        legend: {
-    show: true
-  },
-  theme: {
-  palette: 'palette1' // upto palette10
-},
-stroke: {
-    show: true,
-    curve: 'straight',
-    lineCap: 'round',
-    colors: undefined,
-    width: 2,
-    dashArray: 0,      
-}
-  
-    }
-
+      xaxis: {
+        //type: "datetime",
+        categories: this.newDate,
+        axisBorder: {
+          show: false
+        },
+        axisTicks: {
+          show: true
+        }
+      },
+      yaxis: {
+        labels: {
+          offsetX: 14,
+          offsetY: -5
+        },
+        tooltip: {
+          enabled: true
+        }
+      },
+      grid: {
+        padding: {
+          left: -5,
+          right: 5
+        }
+      },
+      tooltip: {
+        x: {
+          format: "dd MMM yyyy"
+        },
+      },
+      legend: {
+        position: 'top',
+        horizontalAlign: 'left'
+      },
+      fill: {
+        type: "solid",
+        fillOpacity: 0.7
+      }
+    };
     this.chart = new ApexCharts(document.querySelector("#apexchart"), options);
 
     this.chart.render();
 
+      // eslint-disable-next-line no-console
+      console.log(generateDayWiseTimeSeries(0, 18))
+
+    // eslint-disable-next-line no-unused-vars
+    function generateDayWiseTimeSeries(s, count) {
+      var values = [[4,3,10,9,29,19,25,9,12,7,19,5,13,9,17,2,7,5], [2,3,8,7,22,16,23,7,11,5,12,5,10,4,15,2,6,2]];
+      var i = 0;
+      var series = [];
+      var x = new Date("11 Nov 2012").getTime();
+      while (i < count) {
+        series.push([x, values[s][i]]);
+        x += 86400000;
+        i++;
+      }
+      return series;
+    }
     },
  }
 }

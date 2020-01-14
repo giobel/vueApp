@@ -1,6 +1,6 @@
 <template>
 <div id='app'>
-    <h1>Title</h1>
+    <h1>BGH</h1>
     <HelloWorld :msg="items"></HelloWorld>
  
 
@@ -60,7 +60,7 @@ export default {
 
         airtableRecords.forEach(item =>{
           var obj = {eid: item['fields']['Id'], 
-                    day: item['fields']['Created'], 
+                    last_update: item['fields']['Created'], 
                     warnings: item['fields']['WARNINGS'], 
                     sheets: item['fields']['SHEETS']};
           self.items.push(obj);
@@ -70,7 +70,7 @@ export default {
           // eslint-disable-next-line no-console
           console.log(error)
       })
-  }
+  }//close response
   },//close methods
   components: {
     // Chart
