@@ -25,10 +25,10 @@ export default {
   }
   },
   mounted(){
-    this.apex();
+    this.apexc();
   },
   methods: {
-    apex(){
+    apexc(){
       var options = {
       chart: {
         type: "area",
@@ -53,7 +53,7 @@ export default {
         enabled: false
       },
       series: [{
-        name: 'Total Sheet ' + this.bodycontent,
+        name: this.title[0],
         data: this.title[1]
       }],
       markers: {
@@ -68,12 +68,31 @@ export default {
       },
       xaxis: {
         //type: "datetime",
+        type: 'category',
         categories: this.title[2],
+        labels: {
+              show: true,
+              rotate: -45,
+              rotateAlways: false,
+              hideOverlappingLabels: false,
+              showDuplicates: true,
+              trim: true,
+              minHeight: undefined,
+              maxHeight: 120,
+              style: {
+                  colors: [],
+                  fontSize: '12px',
+                  fontFamily: 'Helvetica, Arial, sans-serif',
+                  cssClass: 'apexcharts-xaxis-label',
+              },
+              offsetX: 0,
+              offsetY: 0,
+          },
         axisBorder: {
           show: false
         },
         axisTicks: {
-          show: true
+          show: false
         }
       },
       yaxis: {
@@ -91,11 +110,6 @@ export default {
           right: 5
         }
       },
-      tooltip: {
-        x: {
-          format: "dd MMM yyyy"
-        },
-      },
       legend: {
         position: 'top',
         horizontalAlign: 'left'
@@ -103,7 +117,7 @@ export default {
       fill: {
         type: "solid",
         fillOpacity: 0.7
-      }
+      },
     };
 
     try{

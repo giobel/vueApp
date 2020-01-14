@@ -62,7 +62,10 @@ export default {
                     last_updated: [item['fields']['Created'], "Updated"], 
                     warnings: [item['fields']['WARNINGS'],"Warnings"], 
                     sheets: [item['fields']['SHEETS'], "Sheets"],
-                    elements: [item['fields']['ELEMENTS'],"Total Elements"]
+                    elements: [item['fields']['ELEMENTS'],"Elements"],
+                    views: [item['fields']['VIEWS'],"Views"],
+                    elementTypes: [item['fields']['ELEMENT TYPES'],"Views"],
+                    viewports: [item['fields']['VIEWPORTS'],"Viewports"]
                     };
           self.items.push(obj);
         });

@@ -37,6 +37,10 @@ export default {
       newDate: [],
       sheetsTimeSerie: [],
       warningTimeSerie: [],
+      viewsTimeSerie: [],
+      elementsTimeSerie: [],
+      elementsTypeTimeSerie: [],
+      viewportsTimeSerie: []
     };
   },
   created(){
@@ -60,13 +64,24 @@ export default {
 
     this.msg.forEach( item =>{
     var dateString = new Date(item.last_updated[0]);
-    this.newDate.push(dateFormat(dateString, "dd/m htt"))
+    this.newDate.push(dateFormat(dateString, "dd/mm htt"))
     
     this.sheetsTimeSerie.push(item.sheets[0]);
     this.warningTimeSerie.push(item.warnings[0]);
+    this.viewsTimeSerie.push(item.views[0]);
+    this.elementsTimeSerie.push(item.elements[0]);
+    this.elementsTypeTimeSerie.push(item.elementTypes[0]);
+    this.viewportsTimeSerie.push(item.viewports[0]);
+
     })
 
-    this.statusSummary.push(["Sheets", this.sheetsTimeSerie, this.newDate],["Warnings",this.warningTimeSerie, this.newDate])
+    this.statusSummary.push(["Sheets", this.sheetsTimeSerie, this.newDate],
+                            ["Views",this.viewsTimeSerie, this.newDate],
+                            ["Viewports",this.viewportsTimeSerie, this.newDate],
+                            ["Elements",this.elementsTimeSerie, this.newDate],
+                            ["Element Types",this.elementsTypeTimeSerie, this.newDate],
+                            ["Warnings",this.warningTimeSerie, this.newDate]
+                            )
 
 
     // eslint-disable-next-line no-console
