@@ -4,9 +4,8 @@
 		<h2 class="card-title">{{title[1]}}</h2>
 		<h6 class="card-subtitle mb-2 text-muted">{{title[0]}}</h6>
       <div class="card-body">
-        <p class="card-text">{{bodycontent}}</p>
-        <div :id="bodycontent">{{apex()}}</div>
-        <div id = "charte"/>
+        <div id="charte">{{bodycontent}}</div>
+        
       </div>
     </div>
     
@@ -21,6 +20,19 @@ export default {
   props: {
     title: Array,
     bodycontent: String
+  },
+  data(){
+  return  {
+chart: null,
+    }
+  },
+  mounted(){
+this.apex();
+  },
+    created() {
+      
+      //this.apex();
+    
   },
   methods: {
     apex(){
@@ -112,9 +124,9 @@ export default {
     }
 
 
-    var chart = new ApexCharts(document.querySelector("#chart"+this.bodycontent), options);
+    this.chart = new ApexCharts(document.getElementById("chart" + this.bodycontent), options);
 
-    chart.render();
+    this.chart.render();
     
     // eslint-disable-next-line no-console
     console.log("body content " + this.bodycontent)

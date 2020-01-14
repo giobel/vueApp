@@ -41,8 +41,6 @@ export default {
   },
   created(){
       //this.statusSummary.push({titolo:"Warnings", count:"45"},{titolo:"Elements", count:"450"})
-      
-   
   },
   watch: {
       msg(val) {
