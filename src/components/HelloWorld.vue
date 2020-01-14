@@ -2,7 +2,7 @@
   <div class="hello">
     <div class="container-fluid mt-4">
     <div class="row justify-content-center">
-    <Card v-for="(value, index) in statusSummary"  v-bind:key="index" :title="value" :bodyContent="index.toString()"/>  
+    <Card v-for="(value, index) in statusSummary"  v-bind:key="index" :title="value" :bodycontent="(index+1).toString()"/>  
     </div>
     </div>
     <h3>List of values</h3>
@@ -42,8 +42,7 @@ export default {
   created(){
       //this.statusSummary.push({titolo:"Warnings", count:"45"},{titolo:"Elements", count:"450"})
       
-      // eslint-disable-next-line no-console
-      //console.log("msg length " + this.msg[this.msg.length-1])
+   
   },
   watch: {
       msg(val) {
@@ -51,6 +50,8 @@ export default {
       //this.statusSummary.push(this.msg[this.msg.length-1])
       this.statusSummary = Object.entries(this.msg[this.msg.length-1]);
       this.apex(val);
+      // eslint-disable-next-line no-console
+      //console.log(Object.entries(this.statusSummary))
     }
   },
  methods:{
@@ -69,7 +70,7 @@ export default {
     })
 
     // eslint-disable-next-line no-console
-    console.log(this.sheetsTimeSerie)
+    //console.log(this.sheetsTimeSerie)
 
 
 var options = {
@@ -158,7 +159,7 @@ var options = {
     this.chart.render();
 
       // eslint-disable-next-line no-console
-      console.log(generateDayWiseTimeSeries(0, 18))
+      //console.log(generateDayWiseTimeSeries(0, 18))
 
     // eslint-disable-next-line no-unused-vars
     function generateDayWiseTimeSeries(s, count) {

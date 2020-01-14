@@ -1,11 +1,12 @@
 <template>
 <div class="col-auto mb-3">
-    <div class="card bg-light mb-3" style="width: 40rem">
+    <div class="card bg-light mb-3" style="width: 30rem">
 		<h2 class="card-title">{{title[1]}}</h2>
 		<h6 class="card-subtitle mb-2 text-muted">{{title[0]}}</h6>
-      <div class="card-body" :id="bodyContent">
-        <p class="card-text">{{bodyContent}}</p>
-        <div id="charte"></div>
+      <div class="card-body">
+        <p class="card-text">{{bodycontent}}</p>
+        <div :id="bodycontent">{{apex()}}</div>
+        <div id = "charte"/>
       </div>
     </div>
     
@@ -19,12 +20,7 @@ export default {
   name: 'Card',
   props: {
     title: Array,
-    bodyContent: String
-  },
-  created(){
-    // eslint-disable-next-line no-console
-    console.log("created" + this.bodyContent)
-this.apex();
+    bodycontent: String
   },
   methods: {
     apex(){
@@ -52,7 +48,7 @@ this.apex();
         enabled: false
       },
       series: [{
-        name: 'Total Views',
+        name: 'Total Views ' + this.bodycontent,
         data: generateDayWiseTimeSeries(0, 18)
       }, {
         name: 'Unique Views',
@@ -107,11 +103,21 @@ this.apex();
       }
     };
 
-    this.charta = new ApexCharts(document.querySelector("#charte"), options);
+    try{
+    document.getElementById('charte').id = "chart" + this.bodycontent;
+    }
+  catch(err){
+    // eslint-disable-next-line no-console
+    console.log(err)
+    }
 
-    this.charta.render();
+
+    var chart = new ApexCharts(document.querySelector("#chart"+this.bodycontent), options);
+
+    chart.render();
     
-    document.getElementById('charte').id = "nextstep";
+    // eslint-disable-next-line no-console
+    console.log("body content " + this.bodycontent)
 
     // eslint-disable-next-line no-console
     console.log("Run function")
