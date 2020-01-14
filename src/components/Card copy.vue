@@ -1,8 +1,8 @@
 <template>
 <div class="col-auto mb-3">
     <div class="card bg-light mb-3" style="width: 30rem">
-		<h2 class="card-title">{{title[1]}}</h2>
-		<h6 class="card-subtitle mb-2 text-muted">{{title[0]}}</h6>
+		<h2 class="card-title">{{title[1][0]}}</h2>
+		<h6 class="card-subtitle mb-2 text-muted">{{title[1][1]}}</h6>
       <div class="card-body">
         <div id="charte"></div>
         
@@ -28,11 +28,6 @@ chart: null,
   },
   mounted(){
 this.apex();
-  },
-    created() {
-      
-      //this.apex();
-    
   },
   methods: {
     apex(){
@@ -62,9 +57,6 @@ this.apex();
       series: [{
         name: 'Total Views ' + this.bodycontent,
         data: generateDayWiseTimeSeries(0, 18)
-      }, {
-        name: 'Unique Views',
-        data: generateDayWiseTimeSeries(1, 18)
       }],
       markers: {
         size: 0,

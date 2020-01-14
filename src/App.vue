@@ -58,11 +58,11 @@ export default {
           // console.log(airtableRecords.map(x=>x.fields.Id))
 
         airtableRecords.forEach(item =>{
-          var obj = {eid: item['fields']['Id'], 
-                    Updated: item['fields']['Created'], 
-                    Warnings: item['fields']['WARNINGS'], 
-                    Sheets: item['fields']['SHEETS'],
-                    Elements: item['fields']['ELEMENTS']
+          var obj = {eid: [item['fields']['Id'], "Element Id"], 
+                    last_updated: [item['fields']['Created'], "Updated"], 
+                    warnings: [item['fields']['WARNINGS'],"Warnings"], 
+                    sheets: [item['fields']['SHEETS'], "Sheets"],
+                    elements: [item['fields']['ELEMENTS'],"Total Elements"]
                     };
           self.items.push(obj);
         });

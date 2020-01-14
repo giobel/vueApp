@@ -8,7 +8,7 @@
     <h3>List of values</h3>
     <!-- <li v-for="size in this.msg" v-bind:key="size" >{{ size.warnings }}</li> -->
     <li v-for="(value, index) in msg"  v-bind:key="index">
-      {{value.eid}} : {{value.Updated}} - Warnings {{value.Warnings}}</li>
+      {{value.eid}} : {{value.last_updated}} - Warnings {{value.warnings}}</li>
     <div id="apexchart"></div>        
     <!-- <Card v-for="(value, index) in msg"  v-bind:key="index" :title="value.eid.toString()"/>   -->
   </div>
@@ -46,7 +46,7 @@ export default {
       msg(val) {
       if (this.chart != null) this.chart.remove();
       //this.statusSummary.push(this.msg[this.msg.length-1])
-      this.statusSummary = Object.entries(this.msg[this.msg.length-1]);
+      //this.statusSummary = Object.entries(this.msg);
       this.apex(val);
       // eslint-disable-next-line no-console
       //console.log(Object.entries(this.statusSummary))
@@ -58,17 +58,22 @@ export default {
       //console.log("apex: " + this.items.map(s => s.sheets));
     //var date = this.msg.map(s => s.last_update);
 
-
     this.msg.forEach( item =>{
-    var dateString = new Date(item.Updated);
+    var dateString = new Date(item.last_updated[0]);
+    this.newDate.push(dateFormat(dateString, "dd/m htt"))
     
-    this.newDate.push(dateFormat(dateString, "ddd dd/mm/yy htt"))
-    this.sheetsTimeSerie.push(item.Sheets);
-    this.warningTimeSerie.push(item.Warnings);
+    this.sheetsTimeSerie.push(item.sheets[0]);
+    this.warningTimeSerie.push(item.warnings[0]);
     })
 
+    this.statusSummary.push(["Sheets", this.sheetsTimeSerie, this.newDate],["Warnings",this.warningTimeSerie, this.newDate])
+
+
     // eslint-disable-next-line no-console
-    //console.log(this.sheetsTimeSerie)
+    console.log(this.sheetsTimeSerie)
+    // eslint-disable-next-line no-console
+    console.log(this.newDate)
+    
 
 
 var options = {
