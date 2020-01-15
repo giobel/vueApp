@@ -1,7 +1,7 @@
 <template>
 <div class="col-auto mb-3">
     <div class="card bg-light mb-3" style="width: 30rem">
-		<h2 class="card-title text-primary">{{title[1][title[1].length-1]}}</h2>
+		<h2 class="card-title text-success">{{title[1][title[1].length-1]}}</h2>
 		<h6 class="card-subtitle mb-2 text-muted">{{title[0]}}</h6>
       <div class="card-body">
         <div id="charte"></div>       
@@ -44,7 +44,7 @@ export default {
           opacity: 0.06
         }
       },
-      colors: ['#00E396', '#0090FF'],
+      colors: [this.title[3]],
       stroke: {
         curve: "smooth",
         width: 3

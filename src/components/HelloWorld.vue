@@ -75,12 +75,12 @@ export default {
 
     })
 
-    this.statusSummary.push(["Sheets", this.sheetsTimeSerie, this.newDate],
-                            ["Views",this.viewsTimeSerie, this.newDate],
-                            ["Viewports",this.viewportsTimeSerie, this.newDate],
-                            ["Elements",this.elementsTimeSerie, this.newDate],
-                            ["Element Types",this.elementsTypeTimeSerie, this.newDate],
-                            ["Warnings",this.warningTimeSerie, this.newDate]
+    this.statusSummary.push(["Sheets", this.sheetsTimeSerie, this.newDate, "#0090FF"],
+                            ["Views",this.viewsTimeSerie, this.newDate,"#45BEFF"],
+                            ["Viewports",this.viewportsTimeSerie, this.newDate,"#FFBD33"],
+                            ["Elements",this.elementsTimeSerie, this.newDate,"#33FFBD"],
+                            ["Element Types",this.elementsTypeTimeSerie, this.newDate, "#75FF33"],
+                            ["Warnings",this.warningTimeSerie, this.newDate, "#FF5733"]
                             )
 
 

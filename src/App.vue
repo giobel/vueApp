@@ -1,6 +1,6 @@
 <template>
 <div id='app'>
-    <h1>BGH</h1>
+    <h1 class="text-warning">BGH</h1>
     <HelloWorld :msg="items"></HelloWorld>
  
   <div class="alert alert-success alert-dismissible fade show" role="alert">
