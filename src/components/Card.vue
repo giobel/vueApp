@@ -1,9 +1,9 @@
 <template>
 <div class="col-auto mb-3">
     <div class="card bg-light mb-3" style="width: 30rem">
-		<h2 class="card-title text-success">{{title[1][title[1].length-1]}}</h2>
+		<h2 class="card-title">{{title[3][title[3].length-1]}}</h2>
 		<h6 class="card-subtitle mb-2 text-muted">{{title[0]}}</h6>
-      <div class="card-body">
+      <div class="card-body" style="padding: 0">
         <div id="charte"></div>       
       </div>
     </div>
@@ -32,6 +32,8 @@ export default {
       var options = {
       chart: {
         type: "area",
+                  toolbar: {
+            show: true },
         height: 250,
         foreColor: "#999",
         stacked: true,
@@ -44,7 +46,7 @@ export default {
           opacity: 0.06
         }
       },
-      colors: [this.title[3]],
+      colors: [this.title[1]],
       stroke: {
         curve: "smooth",
         width: 3
@@ -54,7 +56,7 @@ export default {
       },
       series: [{
         name: this.title[0],
-        data: this.title[1]
+        data: this.title[2]
       }],
       markers: {
         size: 0,
@@ -70,6 +72,13 @@ export default {
         //type: "datetime",
         type: 'category',
         categories: this.title[2],
+        crosshairs: {
+            show: true,
+            position: 'front',
+            stroke: {
+              color: '#EAE7E7',
+              width: 1,
+              dashArray: 0 } },
         labels: {
               show: true,
               rotate: -45,
@@ -93,6 +102,9 @@ export default {
         },
         axisTicks: {
           show: false
+        },
+        tooltip:{
+          enabled: false
         }
       },
       yaxis: {
@@ -112,7 +124,8 @@ export default {
       },
       legend: {
         position: 'top',
-        horizontalAlign: 'left'
+        horizontalAlign: 'left',
+        show: false
       },
       fill: {
         type: "solid",
