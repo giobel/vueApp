@@ -1,14 +1,28 @@
 <template>
 <div id='app'>
-    <h1 class="text-warning">BGH</h1>
-    <HelloWorld :msg="items"></HelloWorld>
- 
-  <div class="alert alert-success alert-dismissible fade show" role="alert">
-  With Bootstrap!
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
+    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0"></a>
+
+      <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">ARP</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div id="sidenav" class="sidenav bg-light ">
+    
+    <b-row>
+        <b-col sm="10" style="margin-left:15px">
+          <b-form-select v-model="selected" :options="options"></b-form-select>
+        </b-col>
+    </b-row>
+    </div>
+
+    <div class="content" style="margin-left: 200px">
+        <HelloWorld :msg="items" ></HelloWorld>
+    </div>
+
 </div>
 </template>
 
@@ -20,6 +34,11 @@
 
 import axios from "axios";
 import HelloWorld from './components/HelloWorld.vue'
+import { BFormSelect } from 'bootstrap-vue'
+import { BCol } from 'bootstrap-vue'
+import { BRow } from 'bootstrap-vue'
+
+
 
 
 // eslint-disable-next-line no-console
@@ -32,16 +51,55 @@ export default {
     return{
       items: [],
       startups: [],
+      selected: null,
+        options: [
+    {
+      text: 'Please select some item',
+      value: null
+    },
+    {
+      text: 'BGH',
+      value: 'app7DOsL5PdjPEbzq'
+    }, 
+        ]
+      //title: document.getElementById('dropdownMenuButton').textContent
     }
   },
   created: function () {
-       this.loadItems();
+       //this.loadItems();
+       //this.generateItems();
+       
     },
+  watch: {
+    selected: function () {
+      this.loadItems(this.selected);
+    }
+  },
   methods:{
-     loadItems(){
+generateItems(){
+var today = new Date();
+
+for (let index = 0; index < 5; index++) {
+  
+var obj = { eid: [index, "Element Id"],
+            last_updated:  [today, "Updated"],
+            warnings: [4+index,"Warnings"], 
+            sheets: [5+index, "Sheets"],
+            elements: [6+index,"Elements"],
+            views: [70+index,"Views"],
+            elementTypes: [8-index,"Views"],
+            viewports: [19+index,"Viewports"]
+          }
+
+          this.items.push(obj);
+  
+}
+    },
+     loadItems(selectedBoard){
       // Init variables
       var self = this
-      var app_id = process.env.VUE_APP_ID;
+      //var app_id = process.env.VUE_APP_ID;
+      var app_id = selectedBoard;
       var app_key = process.env.VUE_APP_KEY;
       this.items = []
       axios.get(
@@ -67,9 +125,9 @@ export default {
                     elementTypes: [item['fields']['ELEMENT TYPES'],"Views"],
                     viewports: [item['fields']['VIEWPORTS'],"Viewports"]
                     };
-          self.items.push(obj);
-        });
 
+          self.items.push(obj);
+        });        
       }).catch(function(error){
           // eslint-disable-next-line no-console
           console.log(error)
@@ -78,20 +136,64 @@ export default {
   },//close methods
   components: {
     // Chart
-    HelloWorld
+    HelloWorld,
+   BFormSelect,
+   BCol,
+   BRow
   },
   }
 </script>
 
 <style>
+
+.body{
+  background-color: #dfdfdf
+}
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 30px;
   margin-left: 30px;
-  margin-right: 30px;
+  margin-right: 0px;
+  background-color: #dfdfdf
 }
+
+.content{
+  margin-top: 40px;
+  background-color: #dfdfdf
+}
+
+.sidenav {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 50px;
+  text-align: left;
+}
+
+.sidenav a {
+  padding: 6px 6px 6px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #f5e50e;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
 </style>

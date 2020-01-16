@@ -1,7 +1,7 @@
 <template>
 <div class="col-auto mb-3">
-    <div class="card bg-light mb-3" style="width: 30rem">
-		<h2 class="card-title">{{title[3][title[3].length-1]}}</h2>
+    <div class="card bg-light mb-3" style="width: 20rem">
+		<h2 class="card-title">{{increment}}</h2>
 		<h6 class="card-subtitle mb-2 text-muted">{{title[0]}}</h6>
       <div class="card-body" style="padding: 0">
         <div id="charte"></div>       
@@ -22,19 +22,25 @@ export default {
   data(){
   return  {
     chart: null,
+    increment: null
   }
   },
   mounted(){
     this.apexc();
+    this.findIncrement();
   },
   methods: {
+    findIncrement(){
+        var n = this.title[3][this.title[3].length-1]-this.title[3][this.title[3].length-2];
+        this.increment = (n < 0?"":"+") + n
+    },
     apexc(){
       var options = {
       chart: {
         type: "area",
                   toolbar: {
             show: true },
-        height: 250,
+        height: 200,
         foreColor: "#999",
         stacked: true,
         dropShadow: {
@@ -56,7 +62,7 @@ export default {
       },
       series: [{
         name: this.title[0],
-        data: this.title[2]
+        data: this.title[3]
       }],
       markers: {
         size: 0,
@@ -81,21 +87,21 @@ export default {
               dashArray: 0 } },
         labels: {
               show: true,
-              rotate: -45,
+              rotate: -90,
               rotateAlways: false,
-              hideOverlappingLabels: false,
+              hideOverlappingLabels: true,
               showDuplicates: true,
-              trim: true,
+              trim: false,
               minHeight: undefined,
               maxHeight: 120,
               style: {
                   colors: [],
-                  fontSize: '12px',
+                  fontSize: '10px',
                   fontFamily: 'Helvetica, Arial, sans-serif',
                   cssClass: 'apexcharts-xaxis-label',
               },
               offsetX: 0,
-              offsetY: 0,
+              offsetY: -5,
           },
         axisBorder: {
           show: false
@@ -118,7 +124,7 @@ export default {
       },
       grid: {
         padding: {
-          left: -5,
+          left: 20,
           right: 5
         }
       },
@@ -146,12 +152,6 @@ export default {
 
     this.chart.render();
     
-    // eslint-disable-next-line no-console
-    console.log("body content " + this.bodycontent)
-
-    // eslint-disable-next-line no-console
-    console.log("Run function")
-
 
     }
   }
