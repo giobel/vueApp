@@ -25,9 +25,22 @@ export default {
     increment: null
   }
   },
+  watch: {
+      title(val) {
+      if (this.chart != null) this.chart.remove();
+      //this.statusSummary.push(this.msg[this.msg.length-1])
+      //this.statusSummary = Object.entries(this.msg);
+      this.apexc(val);
+      this.findIncrement(val);
+      // eslint-disable-next-line no-console
+      console.log("Watch below")
+      // eslint-disable-next-line no-console
+      console.log(Object.entries(this.statusSummary))
+    }
+  },
   mounted(){
-    this.apexc();
-    this.findIncrement();
+    //this.apexc();
+    //this.findIncrement();
   },
   methods: {
     findIncrement(){

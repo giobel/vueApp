@@ -61,13 +61,15 @@ export default {
       text: 'BGH',
       value: 'app7DOsL5PdjPEbzq'
     }, 
-    {
-      text: 'RGB',
-      value: null
-    }, 
         ]
+      //title: document.getElementById('dropdownMenuButton').textContent
     }
   },
+  created: function () {
+       //this.loadItems();
+       //this.generateItems();
+       
+    },
   watch: {
     selected: function () {
       this.items.length = 0;
@@ -75,6 +77,25 @@ export default {
     }
   },
   methods:{
+generateItems(){
+var today = new Date();
+
+for (let index = 0; index < 5; index++) {
+  
+var obj = { eid: [index, "Element Id"],
+            last_updated:  [today, "Updated"],
+            warnings: [4+index,"Warnings"], 
+            sheets: [5+index, "Sheets"],
+            elements: [6+index,"Elements"],
+            views: [70+index,"Views"],
+            elementTypes: [8-index,"Views"],
+            viewports: [19+index,"Viewports"]
+          }
+
+          this.items.push(obj);
+  
+}
+    },
      loadItems(selectedBoard){
       // Init variables
       var self = this
@@ -82,9 +103,7 @@ export default {
       var app_id = selectedBoard;
       var app_key = process.env.VUE_APP_KEY;
       this.items = []
-
-
-axios.get(
+      axios.get(
           //"https://api.airtable.com/v0/"+app_id+"/Model%20Status?maxRecords=100&Menu?view=Grid%20view"
           "https://api.airtable.com/v0/"+app_id+"/Model%20Status?maxRecords=100&sort%5B0%5D%5Bfield%5D=Id&sort%5B0%5D%5Bdirection%5D=asc&view=Grid%20view",
           { 
@@ -114,11 +133,7 @@ axios.get(
           // eslint-disable-next-line no-console
           console.log(error)
       })
-
-      
-
-      
-  }//close loadItems
+  }//close response
   },//close methods
   components: {
     // Chart

@@ -43,6 +43,7 @@ export default {
   },
   data() {
     return {
+      chart: null,
       statusSummary: [],
       newDate: [],
       sheetsTimeSerie: [],
@@ -53,20 +54,18 @@ export default {
       viewportsTimeSerie: []
     };
   },
+  created(){
+      //this.statusSummary.push({titolo:"Warnings", count:"45"},{titolo:"Elements", count:"450"})
+      //to be removed
+      //this.apex();
+            // eslint-disable-next-line no-console
+      console.log(Object.entries(this.statusSummary))
+  },
   watch: {
       msg(val) {
+      if (this.chart != null) this.chart.remove();
       //this.statusSummary.push(this.msg[this.msg.length-1])
       //this.statusSummary = Object.entries(this.msg);
-      this.statusSummary.length = 0,
-      this.newDate.length = 0,
-      this.sheetsTimeSerie.length = 0,
-      this.warningTimeSerie.length = 0,
-      this.viewsTimeSerie.length = 0,
-      this.elementsTimeSerie.length = 0,
-      this.elementsTypeTimeSerie.length = 0,
-      this.viewportsTimeSerie.length = 0
-      // eslint-disable-next-line no-console
-      console.log("Watched")
       this.apex(val);
       // eslint-disable-next-line no-console
       console.log(Object.entries(this.statusSummary))
